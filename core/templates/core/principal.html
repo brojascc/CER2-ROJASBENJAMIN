@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Añadir tailwind -->
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
@@ -21,26 +21,40 @@
                 <div class="flex items-center space-x-12">
                     <h1 class="text-2xl font-bold tracking-tighter text-blue-600">PATRIMONIO VIVO</h1>
                     <div class="hidden md:flex space-x-8">
-                        <a href="#" class="text-sm font-medium hover:text-black/60 transition-colors duration-300 relative group">
+                        <a href="{% url 'catalogo' %}" class="text-sm font-medium hover:text-black/60 transition-colors duration-300 relative group">
                             Catálogo
                             <span class="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
                         </a>
-                        <a href="#" class="text-sm font-medium hover:text-black/60 transition-colors duration-300 relative group">
+                        <a href="{% url 'gestion' %}" class="text-sm font-medium hover:text-black/60 transition-colors duration-300 relative group">
                             Gestión Interna
                             <span class="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
                         </a>
                     </div>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <a href="{% url 'login' %}">
-                        <button class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
-                            Inicia Sesión
+
+                {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
+                            Cerrar Sesión
                         </button>
-                    </a href="#">
-                    <button class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
-                        Regístrate
-                    </button>
-                </div>
+                    </form>
+                {% else %}
+                    <div class="flex items-center space-x-3">
+                        <a href="{% url 'login' %}">
+                            <button class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
+                                Inicia Sesión
+                            </button>
+                        </a>
+
+                        <a href="{% url 'registrar' %}">
+                            <button class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
+                                Regístrate
+                            </button>
+                        </a>
+                    </div>
+                {% endif %}
+                
             </div>
         </div>
     </nav>
