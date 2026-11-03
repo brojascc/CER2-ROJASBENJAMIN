@@ -12,12 +12,11 @@ class Categoria(models.Model):
     
     
 class LugarPatrimonial(models.Model):
-    # id = models.UUIDField(primary_key=True, editable=False)
-    nombre = models.TextField()
-    descripcion = models.CharField(max_length=100)
-    ubicacion = models.CharField(max_length=100)
-    anio_construccion = models.DateField()
-    imagen = models.URLField(null=True, blank=True)
+    nombre = models.CharField(max_length=200, unique=True)
+    descripcion = models.TextField()
+    ubicacion = models.CharField(max_length=255)
+    anio_construccion = models.IntegerField(null=True, blank=True)
+    imagen = models.URLField(null=True, blank=True, max_length=500)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
     def __str__(self):

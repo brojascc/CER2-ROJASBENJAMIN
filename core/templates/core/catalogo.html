@@ -14,17 +14,44 @@
 </head>
 <body>
 
+    <h1 class="text-7xl font-bold m-10 text-center">
+        CATÁLOGO
+    </h1>
 
-
-
-
-
-
-
-
-
-
-
+    <hr class="p-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center justify-center">
+                
+                {% for patrimonio in patrimonios%}
+                    <article class="group p-4">
+                        <div class="relative overflow-hidden bg-gray-200 aspect-[3/4] border-b-2 border-black">
+                            <img 
+                                src="{{patrimonio.imagen}}" 
+                                alt="Wild Journey T-shirt" 
+                                class="w-full h-full object-cover"
+                                loading="lazy"
+                            />
+                        </div>
+                        
+                        <div class="p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <div class="category-tag inline-block mb-2">{{patrimonio.categoria.nombre}}</div>
+                                    <h3 class="text-2xl font-bold">{{patrimonio.nombre}}</h3>
+                                </div>
+                                <!-- <div class="price-tag text-right">
+                                    <span class="text-lg">$35</span>
+                                </div> -->
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <button class="bg-black text-white px-6 py-2 text-sm font-medium hover:bg-gray-800 transition-colors flex items-center space-x-2">
+                                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                                    <span>Ver más</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
 
 
 

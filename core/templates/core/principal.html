@@ -25,14 +25,23 @@
                             Catálogo
                             <span class="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
                         </a>
-                        <a href="{% url 'gestion' %}" class="text-sm font-medium hover:text-black/60 transition-colors duration-300 relative group">
-                            Gestión Interna
-                            <span class="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
-                        </a>
+
+                        {% if user.is_superuser %}
+                            <a href="{% url 'gestion' %}" class="text-sm font-medium hover:text-black/60 transition-colors duration-300 relative group">
+                                Gestión Interna
+                                <span class="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                        {% endif %}
+
                     </div>
                 </div>
 
                 {% if user.is_authenticated %}
+
+                    <p class="text-center">
+                        Bienvenido {{user.get_username}}
+                    </p>
+
                     <form method="POST" action="{% url 'logout' %}">
                         {% csrf_token %}
                         <button type="submit" class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
@@ -43,7 +52,7 @@
                     <div class="flex items-center space-x-3">
                         <a href="{% url 'login' %}">
                             <button class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
-                                Inicia Sesión
+                                Iniciar Sesión
                             </button>
                         </a>
 
@@ -94,29 +103,15 @@
                 Catálogo
             </h1>
 
-            <div class="grid w-full grid-cols-1 gap-6 mx-auto lg:grid-cols-3">
+            <p class="text-1xl md:text-2xl lg:text-3xl  text-center py-4">
+                Visita la variedad de patrimonios de las siguientes Categorías.
+            </p>
+
+            <div class="grid w-full grid-cols-1 gap-6 mx-auto md:grid-cols-2 lg:grid-cols-3">
                 <div class="p-6">
                     <img class="object-cover object-center w-full mb-8 lg:h-48 md:h-36 rounded-xl" src="https://via.placeholder.com/150" alt="blog">
 
                     <h1 class="mx-auto mb-8 text-2xl font-semibold leading-none tracking-tighter text-neutral-600 lg:text-3xl">Patromonio 1</h1>
-                    <p class="mx-auto text-base leading-relaxed text-gray-500">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>                <div class="mt-4">
-                        <a href="#" class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-neutral-600" title="read more">Ver más</a>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <img class="object-cover object-center w-full mb-8 lg:h-48 md:h-36 rounded-xl" src="https://via.placeholder.com/150" alt="blog">
-
-                    <h1 class="mx-auto mb-8 text-2xl font-semibold leading-none tracking-tighter text-neutral-600 lg:text-3xl">Patromonio 2</h1>
-                    <p class="mx-auto text-base leading-relaxed text-gray-500">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>                <div class="mt-4">
-                        <a href="#" class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-neutral-600" title="read more">Ver más</a>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <img class="object-cover object-center w-full mb-8 lg:h-48 md:h-36 rounded-xl" src="https://via.placeholder.com/150" alt="blog">
-
-                    <h1 class="mx-auto mb-8 text-2xl font-semibold leading-none tracking-tighter text-neutral-600 lg:text-3xl">Patrimonio 3</h1>
                     <p class="mx-auto text-base leading-relaxed text-gray-500">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>                <div class="mt-4">
                         <a href="#" class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-neutral-600" title="read more">Ver más</a>

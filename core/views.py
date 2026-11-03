@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from .models import LugarPatrimonial, Categoria
+from django.core.exceptions import PermissionDenied
 
 # Create your views here.
 def principal(request):
-    return render(request, 'core/principal.html')
+    categorias = Categoria.objects.all()
+    return render(request, 'core/principal.html', {'categorias': categorias})
 
 def registrar(request):
     if request.method == 'POST':
@@ -22,7 +25,7 @@ def registrar(request):
             usuario = User.objects.create_user(username=nombre, email=correo, password=contraseña)
 
             login(request, usuario)  
-            return render(request, 'core/principal.html')
+            return redirect('principal')
 
     return render(request, 'core/registrar.html')
 
@@ -35,14 +38,21 @@ def iniciarSesion(request):
         usuario = authenticate(request, username=nombre, password=contraseña)
         if usuario is not None:
             login(request, usuario)
-            return render(request, 'core/principal.html')
+            return redirect('principal')
         else:
             return render(request, 'core/login.html', {'error': 'Credenciales invalidas'})
 
     return render(request, 'core/login.html')
 
 def catalogo(request):
-    return render(request, 'core/catalogo.html')
+    patrimonios = LugarPatrimonial.objects.all()
+    return render(request, 'core/catalogo.html', {'patrimonios': patrimonios})
+
+def patrimonio(request, pk):
+    pass
+
 
 def gestion(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
     return render(request, 'core/gestion.html')
