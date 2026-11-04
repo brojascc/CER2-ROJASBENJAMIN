@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from .models import LugarPatrimonial, Categoria
 from django.core.exceptions import PermissionDenied
+from django.db.models import Q
+
 
 # Create your views here.
 def principal(request):
@@ -44,9 +46,6 @@ def iniciarSesion(request):
 
     return render(request, 'core/login.html')
 
-def catalogo(request):
-    patrimonios = LugarPatrimonial.objects.all()
-    return render(request, 'core/catalogo.html', {'patrimonios': patrimonios})
 
 def patrimonio(request, pk):
     pass
@@ -56,3 +55,23 @@ def gestion(request):
     if not request.user.is_superuser:
         raise PermissionDenied
     return render(request, 'core/gestion.html')
+
+
+def catalogo(request):
+
+    q = request.GET.get('q', '').strip()
+    categoria_id = request.GET.get('categoria', '')
+
+    patrimonios = LugarPatrimonial.objects.select_related('categoria').order_by('nombre')
+
+    if q:
+        patrimonios = patrimonios.filter(Q(nombre__icontains=q) | Q(descripcion__icontains=q))
+    if categoria_id.isdigit():
+        patrimonios = patrimonios.filter(categoria_id=categoria_id)
+
+    return render(request, 'core/catalogo.html', {
+            'patrimonios': patrimonios,
+            'categorias': Categoria.objects.all(),
+            'q': q,
+            'categoria_id': categoria_id,
+        })
