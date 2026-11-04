@@ -16,12 +16,12 @@
 
             {% if user.is_authenticated %}
 
-                <div class="justify-between">
-                    <p class="text-right">
+                <div class="flex flex-col">
+                    <p class="">
                         Bienvenido {{user.get_username}}
                     </p>
 
-                    <form method="POST" action="{% url 'logout' %}">
+                    <form method="POST" action="{% url 'logout' %}" class="justify-end">
                         {% csrf_token %}
                         <button type="submit" class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
                             Cerrar Sesión
