@@ -23,14 +23,13 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('principal/', views.principal, name='principal'),
+
+    path('', views.principal, name='principal'),
+
     path('login/', views.iniciarSesion, name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-
     path('registrar/', views.registrar, name='registrar'),
+
     path('catalogo/', views.catalogo, name='catalogo'),
     path('catalogo/<int:pk>/', views.detalle_patrimonio, name='detalle_patrimonio'),
-
-    path('gestion/', views.gestion, name='gestion'),
-
 ]

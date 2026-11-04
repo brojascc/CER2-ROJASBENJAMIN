@@ -6,10 +6,11 @@ from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 
 
-# Create your views here.
 def principal(request):
     categorias = Categoria.objects.all()
-    return render(request, 'core/principal.html', {'categorias': categorias})
+    patrimonios = LugarPatrimonial.objects.all()
+    patrimonio_aleatorio = LugarPatrimonial.objects.order_by('?').first()
+    return render(request, 'core/principal.html', {'categorias': categorias, 'patrimonios':patrimonios, 'patrimonio_aleatorio': patrimonio_aleatorio})
 
 def registrar(request):
     if request.method == 'POST':
@@ -47,14 +48,6 @@ def iniciarSesion(request):
     return render(request, 'core/login.html')
 
 
-def patrimonio(request, pk):
-    pass
-
-
-def gestion(request):
-    if not request.user.is_superuser:
-        raise PermissionDenied
-    return render(request, 'core/gestion.html')
 
 
 def detalle_patrimonio(request, pk):
