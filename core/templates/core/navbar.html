@@ -1,0 +1,50 @@
+
+<nav class="sticky w-full z-50 bg-white/90 backdrop-blur-sm border-black/5">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <a href="{% url 'principal' %}">
+                    <h1 class="text-2xl font-bold tracking-tighter text-blue-600">PATRIMONIO VIVO</h1>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="{% url 'catalogo' %}" class="text-sm font-medium hover:text-black/60 transition-colors duration-300 relative group">
+                        Catálogo
+                        <span class="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+            </div>
+
+            {% if user.is_authenticated %}
+
+                <div class="justify-between">
+                    <p class="text-right">
+                        Bienvenido {{user.get_username}}
+                    </p>
+
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
+                            Cerrar Sesión
+                        </button>
+                    </form>
+                </div>
+
+            {% else %}
+                <div class="flex items-center space-x-3">
+                    <a href="{% url 'login' %}">
+                        <button class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
+                            Iniciar Sesión
+                        </button>
+                    </a>
+
+                    <a href="{% url 'registrar' %}">
+                        <button class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
+                            Regístrate
+                        </button>
+                    </a>
+                </div>
+            {% endif %}
+            
+        </div>
+    </div>
+</nav>

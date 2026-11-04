@@ -29,6 +29,8 @@ urlpatterns = [
 
     path('registrar/', views.registrar, name='registrar'),
     path('catalogo/', views.catalogo, name='catalogo'),
+    path('catalogo/<int:pk>/', views.detalle_patrimonio, name='detalle_patrimonio'),
+
     path('gestion/', views.gestion, name='gestion'),
 
 ]

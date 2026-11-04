@@ -1,72 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'core/base.html' %}
+{% block titulo %}Principal{% endblock %}
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'core/css/estilos.css' %}">
-
-    <title>Patrimonio Vivo</title>
-</head>
-
-<body>
-    <!-- Nav Bar -->
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-sm border-black/5">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-12">
-                    <h1 class="text-2xl font-bold tracking-tighter text-blue-600">PATRIMONIO VIVO</h1>
-                    <div class="hidden md:flex space-x-8">
-                        <a href="{% url 'catalogo' %}" class="text-sm font-medium hover:text-black/60 transition-colors duration-300 relative group">
-                            Catálogo
-                            <span class="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-
-                        {% if user.is_superuser %}
-                            <a href="{% url 'gestion' %}" class="text-sm font-medium hover:text-black/60 transition-colors duration-300 relative group">
-                                Gestión Interna
-                                <span class="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
-                            </a>
-                        {% endif %}
-
-                    </div>
-                </div>
-
-                {% if user.is_authenticated %}
-
-                    <p class="text-center">
-                        Bienvenido {{user.get_username}}
-                    </p>
-
-                    <form method="POST" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button type="submit" class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
-                            Cerrar Sesión
-                        </button>
-                    </form>
-                {% else %}
-                    <div class="flex items-center space-x-3">
-                        <a href="{% url 'login' %}">
-                            <button class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
-                                Iniciar Sesión
-                            </button>
-                        </a>
-
-                        <a href="{% url 'registrar' %}">
-                            <button class="px-6 py-2 border border-black rounded-lg text-sm font-medium hover:bg-black hover:text-white transition-all duration-300">
-                                Regístrate
-                            </button>
-                        </a>
-                    </div>
-                {% endif %}
-                
-            </div>
-        </div>
-    </nav>
+{% block contenido %}
 
     <!-- Presentación -->
     <main class="pt-32 pb-24 bg-gray-100 min-h-screen sm:text-lg text-sm">
@@ -83,17 +18,16 @@
             </div>
 
             <div class="mt-16 flex flex-wrap gap-4">
-                <button class="px-8 py-4 bg-black text-white rounded-full font-medium hover:bg-black/90 transition-all duration-300 group relative overflow-hidden">
-                    <span class="relative z-10">Visita Nuestro Catálogo</span>
-                    <span class="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition-all duration-500"></span>
-                </button>
-                <!-- <button class="px-8 py-4 border border-black/10 rounded-full font-medium hover:border-black/30 transition-all duration-300 group relative overflow-hidden">
-                    <span class="relative z-10">Nuestro Propósito</span>
-                    <span class="absolute inset-0 bg-black/5 group-hover:bg-black/10 transition-all duration-500"></span>
-                </button> -->
+                <a href="{% url 'catalogo' %}">
+                    <button class="px-8 py-4 bg-black text-white rounded-full font-medium hover:bg-black/90 transition-all duration-300 group relative overflow-hidden">
+                        Visita Nuestro Catálogo
+                    </button>
+                </a>
             </div>
         </div>
     </main>
+
+
 
     <!-- Catalogo -->
     <section>
@@ -128,34 +62,8 @@
                     <br>
                 {% endfor %}
             </div>
-
-
-
             </div>
         </div>
     </section>
+{% endblock %}
 
-    <!-- Footer -->
-    <footer class="bg-white py-8">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="mt-16 pt-8 border-t border-black/5 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-xs text-black/40">© 2026 Patrimonio Vivo.</p>
-                <div class="mt-4 md:mt-0 flex space-x-6">
-                    <a href="#" class="text-xs text-black/40 hover:text-black transition-colors duration-300">X</a>
-                    <a href="#" class="text-xs text-black/40 hover:text-black transition-colors duration-300">Facebook</a>
-                    <a href="#" class="text-xs text-black/40 hover:text-black transition-colors duration-300">Instagram</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-
-</body>
-</html>
-
-
-
-
-
-
-    

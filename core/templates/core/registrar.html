@@ -1,14 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="{% static 'core/css/estilos.css' %}">
-    <title>Registrar Usuario</title>
-</head>
-<body>
+{% extends 'core/base.html' %}
+{% block titulo %}Registrar{% endblock %}
+
+{% block contenido %}
 
 
 <div class="flex min-h-screen items-center justify-center bg-white-100 p-4">
@@ -88,6 +81,4 @@
   </div>
 </div>
 
-    
-</body>
-</html>
+{% endblock %}

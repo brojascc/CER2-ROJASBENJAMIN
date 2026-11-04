@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from .models import LugarPatrimonial, Categoria
@@ -56,6 +56,10 @@ def gestion(request):
         raise PermissionDenied
     return render(request, 'core/gestion.html')
 
+
+def detalle_patrimonio(request, pk):
+    patrimonio = get_object_or_404(LugarPatrimonial.objects.select_related('categoria'), pk=pk)
+    return render(request, 'core/detalle_patrimonio.html', {'patrimonio': patrimonio})
 
 def catalogo(request):
 

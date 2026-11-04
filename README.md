@@ -25,6 +25,3 @@ instrucciones necesarias para instalar las dependencias, configurar la base de d
 - https://tailwindflex.com/
 
 # Instalación de Dependencias
-
-Pillow: Para models.ImageField
-- python -m pip install Pillow

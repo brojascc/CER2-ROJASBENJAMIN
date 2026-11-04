@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+
+{% block titulo %}Detalle{% endblock %}
+
+{% block contenido %}
+
+
+<div class="max-w-3xl mx-auto px-4 py-10">
+    
+    <a href="{% url 'catalogo' %}" class="inline-flex items-center text-sm font-medium text-gray-600 hover:text-black mb-8 transition-colors">
+         <i class="fa-solid fa-arrow-left mr-2"></i> Volver a los Patrimonios
+    </a>
+
+    <article>
+        <span class="inline-block px-3 py-1 bg-gray-100 text-gray-800 text-xs font-semibold rounded-full uppercase tracking-wider mb-3">
+            {{ patrimonio.categoria.nombre }}
+        </span>
+
+        <h1 class="text-4xl font-bold text-gray-900 tracking-tight mb-6">
+            {{ patrimonio.nombre }}
+        </h1>
+
+        <div class="mb-8 overflow-hidden rounded-2xl shadow-lg border border-gray-100 bg-gray-50">
+            <img src="{{ patrimonio.imagen }}" alt="{{ patrimonio.nombre }}" class="w-full h-auto max-h-[500px] object-cover">
+        </div>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-8">
+            {{ patrimonio.descripcion }}
+        </p>
+
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-50 p-6 rounded-2xl mb-8 border border-gray-100">
+            <li class="flex flex-col">
+                <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Ubicación</span>
+                <span class="font-medium text-gray-900">{{ patrimonio.ubicacion }}</span>
+            </li>
+            <li class="flex flex-col">
+                <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Año de construcción</span>
+                <span class="font-medium text-gray-900">{{ patrimonio.anio_construccion }}</span>
+            </li>
+        </ul>
+
+        {% if user.is_superuser %}
+            <div class="pt-4 border-t border-gray-100">
+                <a href="{% url 'admin:core_lugarpatrimonial_change' patrimonio.pk %}" class="inline-flex items-center px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-xl hover:bg-gray-800 transition-colors shadow-sm">
+                    Editar en administrador
+                </a>
+            </div>
+        {% endif %}
+
+    </article>
+</div>
+
+{% endblock %}

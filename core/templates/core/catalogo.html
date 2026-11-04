@@ -1,24 +1,13 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'core/base.html' %}
+{% block titulo %}Catálogo{% endblock %}
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+{% block contenido %}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'core/css/estilos.css' %}">
 
-    <title>Catálogo</title>
-</head>
-<body>
 
-    <div class="text-center my-10">
-        <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-blue-600">
-            CATÁLOGO
-        </h1>
-    </div>
+    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-blue-600 text-center mt-10">
+        CATÁLOGO
+    </h1>
 
     <form method="get" class="max-w-4xl mx-auto mb-12 bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col md:flex-row items-center gap-4">
         
@@ -45,48 +34,40 @@
 
     </form>
 
-
-
-    <hr class="p-5">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-end justify-center">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-end justify-center">
+        
+        {% for patrimonio in patrimonios%}
+            <article class="group p-4">
+                <div class="aspect-[3/3.5] border-b-6 border-black">
+                    <img 
+                        src="{{patrimonio.imagen}}" 
+                        alt="{{patrimonio.nombre}}" 
+                        class="w-full h-full object-cover"
+                    />
+                </div>
                 
-                {% for patrimonio in patrimonios%}
-                    <article class="group p-4">
-                        <div class="aspect-[3/3.5] border-b-6 border-black">
-                            <img 
-                                src="{{patrimonio.imagen}}" 
-                                alt="{{patrimonio.nombre}}" 
-                                class="w-full h-full object-cover"
-                            />
+                <div class="p-6">
+                    <div class="flex items-end justify-between mb-4">
+                        <div>
+                            <div class="category-tag inline-block mb-2">{{patrimonio.categoria.nombre}}</div>
+                            <h3 class="text-2xl font-bold">{{patrimonio.nombre}}</h3>
                         </div>
-                        
-                        <div class="p-6">
-                            <div class="flex items-end justify-between mb-4">
-                                <div>
-                                    <div class="category-tag inline-block mb-2">{{patrimonio.categoria.nombre}}</div>
-                                    <h3 class="text-2xl font-bold">{{patrimonio.nombre}}</h3>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-end justify-between">
-                                <a href="#">
-                                    <button class="bg-black text-white px-6 py-2 text-sm font-medium hover:bg-gray-800 transition-colors flex items-center space-x-2">
-                                        <i class="fa-solid fa-circle-info"></i>
-                                        <span>Ver más</span>
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                {% endfor %}
+                    </div>
+                    
+                    <div class="flex items-end justify-between">
+                        <a href="{% url 'detalle_patrimonio' patrimonio.pk %}">
+                            <button class="bg-black text-white px-6 py-2 text-sm font-medium hover:bg-gray-800 transition-colors flex items-center space-x-2">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span>Ver más</span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+
+{% endblock %}
 
 
 
-
-
-
-
-
-    
-</body>
-</html>
