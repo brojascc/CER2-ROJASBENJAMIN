@@ -42,9 +42,9 @@
                 <span class="text-xs font-bold uppercase tracking-widest text-blue-600 mb-2 block">
                     Nuestra Misión
                 </span>
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-black">
+                <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-black">
                     Acerca de la Fundación
-                </h2>
+                </h1>
                 <p class="mt-4 text-gray-600 text-base sm:text-lg leading-relaxed font-light">
                     Trabajamos activamente en la puesta en valor del patrimonio arquitectónico y cultural nacional, promoviendo el reconocimiento de la memoria histórica urbana en las diversas regiones del país.
                 </p>
@@ -52,7 +52,7 @@
 
             <div class="lg:col-span-7">
                 <div class="bg-gray-50 p-6 sm:p-8 rounded-2xl border border-black/5">
-                    <h3 class="text-lg font-bold text-black mb-2">Modernización y Catálogo Digital</h3>
+                    <h1 class="text-lg font-bold text-black mb-2">Modernización y Catálogo Digital</h1>
                     <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
                         Con el propósito de superar la dispersión de registros históricos en documentos independientes, hemos consolidado una plataforma digital unificada. Esta herramienta optimiza la gestión del acervo patrimonial y facilita a la ciudadanía una consulta estructurada, rigurosa y accesible.
                     </p>
@@ -80,7 +80,7 @@
             {% for categoria in categorias %}
                 <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between pb-8 border-b border-gray-100 last:border-b-0 last:pb-0">
                     <div class="mb-4 lg:mb-0 lg:mr-16 lg:flex-1">
-                        <h2 class="text-xl sm:text-2xl font-bold text-black mb-2">{{ categoria.nombre }}</h2>
+                        <h1 class="text-xl sm:text-2xl font-bold text-black mb-2">{{ categoria.nombre }}</h1>
                         <p class="text-base sm:text-lg text-gray-600 leading-relaxed">
                             {{ categoria.descripcion }}
                         </p>
@@ -88,7 +88,7 @@
                     <div class="flex items-center self-start lg:self-center mt-2 lg:mt-0">
                         <a href="{% url 'catalogo' %}?categoria={{ categoria.id }}">
                             <button class="px-6 py-3 sm:px-8 sm:py-4 bg-black text-white text-sm sm:text-base font-medium rounded-xl hover:bg-gray-800 transition-colors whitespace-nowrap shadow-sm">
-                                Ver más
+                                <i class="fa-solid fa-circle-right fa-lg"></i>
                             </button>
                         </a>
                     </div>
