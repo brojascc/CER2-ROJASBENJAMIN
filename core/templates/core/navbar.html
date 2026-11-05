@@ -13,6 +13,15 @@
                         <span class="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
                     </a>
                 </div>
+
+                {% if user.is_superuser %}
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="{% url 'admin:index' %}" class="text-sm font-medium hover:text-black/60 transition-colors duration-300 relative group py-2">
+                        Administrar
+                        <span class="absolute bottom-0 left-0 w-0 h-px bg-black transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+                {% endif %}
             </div>
 
             <div class="hidden md:flex items-center space-x-4">
@@ -54,7 +63,6 @@
         </div>
     </div>
 
-    <!-- Menú Desplegable Móvil -->
     <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-b border-black/5 px-6 pt-3 pb-6 space-y-4 shadow-lg transition-all">
         <div class="flex flex-col space-y-2">
             <a href="{% url 'catalogo' %}" class="px-3 py-2.5 text-base font-medium text-gray-800 hover:bg-gray-100 rounded-lg transition-colors">

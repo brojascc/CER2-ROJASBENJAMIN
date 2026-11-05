@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from .models import LugarPatrimonial, Categoria
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-
+from django.contrib import admin
 
 def principal(request):
     categorias = Categoria.objects.all()
@@ -49,13 +49,11 @@ def iniciarSesion(request):
 
 
 
-
 def detalle_patrimonio(request, pk):
     patrimonio = get_object_or_404(LugarPatrimonial.objects.select_related('categoria'), pk=pk)
     return render(request, 'core/detalle_patrimonio.html', {'patrimonio': patrimonio})
 
 def catalogo(request):
-
     q = request.GET.get('q', '').strip()
     categoria_id = request.GET.get('categoria', '')
 

@@ -6,3 +6,6 @@ from .models import Categoria
 admin.site.register(LugarPatrimonial)
 admin.site.register(Categoria)
 
+admin.site.has_permission = lambda request: (
+    request.user.is_active and request.user.is_superuser
+)

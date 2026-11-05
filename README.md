@@ -29,7 +29,7 @@ cd PatrimonioVivo
 # Instalación de Dependencias
 
 ```powershell
-pip install Django==5.2.18
+pip install -r requirements.txt
 ```
 
 # Configurar Base de datos
